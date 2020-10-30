@@ -1,5 +1,5 @@
 {
-  "name": "unloop",
+  "name": "something else",
   "private": true,
   "scripts": {
     "generate": "plop --plopfile internals/generators/index.js",
