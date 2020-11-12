@@ -1,4 +1,7 @@
-const styles = theme => ({
+import { createMuiTheme } from '@material-ui/core/styles';
+import theme from 'utils/theme';
+
+const styles = () => ({
   overrides: {
     MuiDialogContent: {
       root: {
@@ -120,4 +123,29 @@ const styles = theme => ({
   },
 });
 
-export default styles;
+const defaultTheme = createMuiTheme();
+Object.assign(defaultTheme, {
+  overrides: {
+    MUIRichTextEditor: {
+      root: {
+        borderLeft: `solid 1px ${theme.palette.common.lightGrey}`,
+        borderRight: `solid 1px ${theme.palette.common.lightGrey}`,
+        borderBottom: `solid 1px ${theme.palette.common.lightGrey}`,
+        borderRadius: '4px',
+      },
+      hidePlaceholder: {
+        display: 'block',
+      },
+      editorContainer: {
+        padding: '20px',
+        overflow: 'auto',
+        height: '130px',
+      },
+      toolbar: {
+        backgroundColor: theme.palette.common.lightestGrey,
+      },
+    },
+  },
+});
+
+export { styles, defaultTheme };

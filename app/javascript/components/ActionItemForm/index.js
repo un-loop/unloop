@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { withStyles, ThemeProvider } from '@material-ui/core/styles';
+import { withStyles, ThemeProvider, MuiThemeProvider } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
@@ -9,7 +9,9 @@ import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import ActionItemCategoryTag from 'components/ActionItemCategoryTag';
 import theme from 'utils/theme';
-import styles from './styles';
+import { styles, defaultTheme } from './styles';
+import MUIRichTextEditor from 'mui-rte';
+import { convertToRaw } from 'draft-js';
 
 function ActionItemForm({
   classes,
@@ -36,6 +38,11 @@ function ActionItemForm({
     setCategory({ target: { value: newCategory } });
   };
 
+  const handleDescriptionChange = state => {
+    const value = JSON.stringify(convertToRaw(state.getCurrentContent()));
+    setDescription({ target: {value} })
+  };
+
   const categoryList = categories.map(category => {
     const isSelectedCategory =
       categorySelected && categorySelected === category;
@@ -51,7 +58,6 @@ function ActionItemForm({
   });
 
   const allFieldsFilled = title && description && categorySelected;
-
   return (
     <ThemeProvider theme={theme}>
       <Paper elevation={0} className={classes.formStyle}>
@@ -102,7 +108,26 @@ function ActionItemForm({
               >
                 <Typography variant="body1">Assignment Description</Typography>
               </div>
-              <TextField
+              <MuiThemeProvider theme={defaultTheme}>
+              <MUIRichTextEditor
+                name="description"
+                className={classes.searchBar}
+                value={description}
+                onChange={handleDescriptionChange}
+                variant="outlined"
+                label="Assignment description"
+                controls={[
+                  'bold',
+                  'italic',
+                  'underline',
+                  'numberList',
+                  'bulletList',
+                  'link',
+                  'code',
+                ]}
+              />
+              </MuiThemeProvider>
+              {/* <TextField
                 variant="outlined"
                 className={classes.searchBar}
                 onChange={e => setDescription(e)}
@@ -113,7 +138,7 @@ function ActionItemForm({
                 required
                 error={failedSubmit && !description}
                 rows={2}
-              />
+              /> */}
             </Grid>
             <Grid item>
               <Typography variant="body1">Due Date (Optional)</Typography>

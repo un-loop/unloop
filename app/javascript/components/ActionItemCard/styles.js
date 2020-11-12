@@ -35,9 +35,9 @@ const styles = theme => ({
   descriptionStyle: {
     textOverflow: 'ellipsis',
     fontSize: '14px',
-    overflow: 'hidden',
+    overflow: 'auto',
     lineHeight: '1.5em',
-    height: '1.5em',
+    maxHeight: '4em',
     maxWidth: 'calc(100% - 64px)',
   },
   buttonStyle: {

@@ -30,9 +30,6 @@ function ViewMoreModal({
   const renderRichText = desc => (
     <MUIRichTextEditor value={desc} readOnly toolbar={false} />
   );
-  const renderReadOnlyTextField = desc => (
-    <Input value={desc} readOnly disableUnderline fullWidth multiline />
-  );
   const renderCategory = categorySelected => (
     <Grid item>
       <ActionItemCategoryTag category={categorySelected} selected={false} />
@@ -101,9 +98,7 @@ function ViewMoreModal({
               <Grid item xs={12}>
                 <Paper className={classes.caseNoteCardModalDescriptionStyle}>
                   <div className={classes.caseNoteDescStyle}>
-                    {isCaseNote
-                      ? renderRichText(description)
-                      : renderReadOnlyTextField(description)}
+                    {renderRichText(description)}
                   </div>
                 </Paper>
               </Grid>
