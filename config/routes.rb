@@ -11,7 +11,18 @@ Rails.application.routes.draw do
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
-  resources :assignments, :studio_assessments, only: :index
+  resources :studio_assessments, only: :index
+  # resources :assignments, only: []
+  resources :assignments, only: [] do
+    collection do
+      get '/', to: 'assignments#index'
+      match 'bulk-modify' => 'assignments#bulk_modify_select', :via => [:get]
+      match 'bulk-modify/:action_item_id' => 'assignments#bulk_modify_create', :via => [:get]
+
+      # get 'bulk-modify', to: 'assignments#bulk_modify'
+    end
+  end
+  # get 'assignments/bulk_modify', action: :bulk_modify, controller: 'assignments'
   
   resources :staffs, only: [] do
     collection do

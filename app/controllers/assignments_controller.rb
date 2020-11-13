@@ -22,4 +22,13 @@ class AssignmentsController < ApplicationController
         end
     end
 
+    def bulk_modify_select
+      @action_items = authorize ActionItem.select("title, updated_at, category, id").order("updated_at DESC").all
+    end
+
+    def bulk_modify_create
+      @action_item_id = params.fetch(:action_item_id)
+      @assignments = authorize Assignment.where(action_item_id: @action_item_id).order("updated_at DESC").includes(participant: :user)
+    end
+
 end
