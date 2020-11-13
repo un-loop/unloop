@@ -1,0 +1,10 @@
+<html>
+<body>
+<h1><%= @action_item_id %></h1>
+<ul>
+  <% for  @assignment in @assignments -%>
+    <li><%= @assignment.participant.user.first_name %> <%= @assignment.participant.user.last_name %> | <%= @assignment.updated_at %> | <%= @assignment.due_date %> | <%= @assignment.completed_participant %> </li>
+  <% end  -%>
+</ul>
+</body>
+</html>
