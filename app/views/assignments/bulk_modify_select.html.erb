@@ -1,10 +1,5 @@
-<html>
-  <body>
-  <ul>
-  <% for  @action_item in @action_items -%>
-    <li><%= @action_item.title %> | <%= @action_item.updated_at %> | <%= @action_item.category %> | <%= @action_item.id %> </li>
-  <% end  -%>
-  </ul>
-  <h1>hiiie</h1>
-  </body>
-</html>
+<%= react_component("Main", {
+  content: "BulkModifySelect",
+  action_items: @action_items,
+}) %>
+

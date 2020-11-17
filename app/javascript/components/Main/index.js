@@ -30,6 +30,7 @@ import UnloopLogo from 'images/unloop_logo.png';
 import BlueprintBanner from 'images/blueprint_banner.png';
 import * as Sentry from '@sentry/browser';
 import StaffDashboard from '../StaffDashboard';
+import BulkModifySelect from '../BulkModifySelect';
 import styles from './styles';
 import { apiGet } from '../../utils/axios';
 import StudioAssessmentDashboard from '../StudioAssessmentDashboard';
@@ -61,7 +62,6 @@ function Main(props) {
     <ListItem
       button
       component="a"
-      disableFocusRipple
       disableTouchRipple
       className={classes.navBarItem}
       onClick={() => {
@@ -112,7 +112,7 @@ function Main(props) {
         }),
         {},
       );
-
+      
     switch (props.content) {
       case 'StaffDashboard':
         return <StaffDashboard {...contentProps}></StaffDashboard>;
@@ -127,6 +127,10 @@ function Main(props) {
       case 'ActionItemCreationPage':
         return (
           <ActionItemCreationPage {...contentProps}></ActionItemCreationPage>
+        );
+      case 'BulkModifySelect':
+        return (
+          <BulkModifySelect {...contentProps}></BulkModifySelect>
         );
       default:
         return null;
@@ -155,7 +159,6 @@ function Main(props) {
                 <ListItem
                   button
                   component="a"
-                  disableFocusRipple
                   disableTouchRipple
                   className={classes.navBarItem}
                   onClick={logout}
