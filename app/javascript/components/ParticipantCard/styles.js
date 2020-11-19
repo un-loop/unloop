@@ -23,8 +23,8 @@ const styles = theme => ({
     lineHeight: '25px',
     color: theme.palette.common.white,
     fontSize: '12px',
-    backgroundColor: ({ participant }) => {
-      switch (participant.status.toUpperCase()) {
+    backgroundColor: ({ row }) => {
+      switch (row.status.toUpperCase()) {
         case 'R0':
           return theme.palette.common.r0;
         case 'R1':

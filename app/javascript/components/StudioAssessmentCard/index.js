@@ -11,20 +11,20 @@ class StudioAssessmentCard extends React.Component {
   }
 
   showParticipant() {
-    const pId = this.props.assessment.participant_id;
+    const pId = this.props.row.participant_id;
     window.location.assign(`participants/${String(pId)}`);
   }
 
   render() {
-    const { assessment } = this.props;
-    const bigPic = assessment.bigpicture_score;
-    const prog = assessment.progfundamentals_score;
-    const vc = assessment.versioncontrol_score;
-    const react = assessment.react_score;
-    const node = assessment.node_score;
-    const db = assessment.db_score;
-    const probSolve = assessment.problemsolving_score;
-    const probSolveAlt = assessment.problemsolvingalt_score;
+    const { row } = this.props;
+    const bigPic = row.bigpicture_score;
+    const prog = row.progfundamentals_score;
+    const vc = row.versioncontrol_score;
+    const react = row.react_score;
+    const node = row.node_score;
+    const db = row.db_score;
+    const probSolve = row.problemsolving_score;
+    const probSolveAlt = row.problemsolvingalt_score;
     const { classes } = this.props;
     const currCategory = this.props.selectedCat;
     return (
@@ -35,7 +35,7 @@ class StudioAssessmentCard extends React.Component {
           onClick={this.showParticipant}
           onKeyDown={this.showParticipant}
         >
-          {this.props.assessment.participant_name}
+          {this.props.row.participant_name}
         </TableCell>
         <TableCell
           className={
@@ -93,7 +93,7 @@ class StudioAssessmentCard extends React.Component {
 }
 
 StudioAssessmentCard.propTypes = {
-  assessment: PropTypes.object,
+  row: PropTypes.object,
   classes: PropTypes.object.isRequired,
   selectedCat: PropTypes.string,
 };
