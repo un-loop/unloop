@@ -1,5 +1,6 @@
 <%= react_component("Main", {
   content: "BulkModifySelect",
   action_items: @action_items,
+  isAdmin: current_user.admin,
 }) %>
 

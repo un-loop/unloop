@@ -10,8 +10,6 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Paper from '@material-ui/core/Paper';
-import ParticipantCard from 'components/ParticipantCard';
-import StudioAssessmentCard from 'components/StudioAssessmentCard';
 import styles from './styles';
 
 function descendingComparator(a, b, orderBy) {
@@ -53,7 +51,6 @@ function EnhancedTableHead(props) {
           <TableCell
             key={headCell.id}
             align="left"
-            pointerEvents={headCell.sortable}
             sortDirection={orderBy === headCell.id ? order : false}
           >
             {headCell.sortable ? (
@@ -174,7 +171,7 @@ EnhancedTable.propTypes = {
   headCells: PropTypes.array.isRequired,
   classes: PropTypes.object.isRequired,
   pageHandler: PropTypes.func.isRequired,
-  page: PropTypes.object.isRequired,
+  page: PropTypes.number.isRequired,
   type: PropTypes.string,
 };
 
