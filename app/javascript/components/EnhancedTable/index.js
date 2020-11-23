@@ -10,8 +10,6 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Paper from '@material-ui/core/Paper';
-import ParticipantCard from 'components/ParticipantCard';
-import StudioAssessmentCard from 'components/StudioAssessmentCard';
 import styles from './styles';
 
 function descendingComparator(a, b, orderBy) {
@@ -53,7 +51,6 @@ function EnhancedTableHead(props) {
           <TableCell
             key={headCell.id}
             align="left"
-            pointer-events={headCell.sortable}
             sortDirection={orderBy === headCell.id ? order : false}
           >
             {headCell.sortable ? (
@@ -90,7 +87,7 @@ EnhancedTableHead.propTypes = {
 };
 
 function EnhancedTable(props) {
-  const { classes } = props;
+  const { classes, CustomRowComponent } = props;
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('name');
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -124,7 +121,7 @@ function EnhancedTable(props) {
           <Table
             className={classes.table}
             aria-labelledby="tableTitle"
-            size="large"
+            size="medium"
             aria-label="enhanced table"
           >
             <EnhancedTableHead
@@ -139,18 +136,12 @@ function EnhancedTable(props) {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map(row => (
                   <TableRow hover tabIndex={-1} key={row.id}>
-                    {type !== 'studio' ? (
-                      <ParticipantCard
-                        key={row.id}
-                        participant={row}
-                      ></ParticipantCard>
-                    ) : (
-                      <StudioAssessmentCard
-                        key={row.id}
-                        assessment={row}
-                        selectedCat={selectedCat}
-                      ></StudioAssessmentCard>
-                    )}
+                    <CustomRowComponent 
+                      key={row.id}
+                      row={row}
+                      selectedCat={selectedCat}  // for StudioAssessmentCard specifically
+                    >
+                    </CustomRowComponent>
                   </TableRow>
                 ))}
               {emptyRows > 0 && (
@@ -180,7 +171,7 @@ EnhancedTable.propTypes = {
   headCells: PropTypes.array.isRequired,
   classes: PropTypes.object.isRequired,
   pageHandler: PropTypes.func.isRequired,
-  page: PropTypes.object.isRequired,
+  page: PropTypes.number.isRequired,
   type: PropTypes.string,
 };
 

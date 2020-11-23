@@ -7,6 +7,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import EnhancedTable from 'components/EnhancedTable';
+import StudioAssessmentCard from 'components/StudioAssessmentCard';
 import styles from './styles';
 
 const TrieSearch = require('trie-search');
@@ -146,6 +147,7 @@ class StudioAssessmentDashboard extends React.Component {
           type="studio"
           pageHandler={this.onPageChange}
           page={this.state.pageNo}
+          CustomRowComponent={StudioAssessmentCard}
         ></EnhancedTable>
       </div>
     );

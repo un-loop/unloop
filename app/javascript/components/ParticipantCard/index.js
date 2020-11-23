@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import CaseNoteForm from 'components/CaseNoteForm';
 import PaperworkForm from 'components/PaperworkForm';
 import { withStyles } from '@material-ui/core/styles';
-
 import {
   faChevronRight,
   faCheck,
@@ -11,23 +10,22 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import TableCell from '@material-ui/core/TableCell';
-
 import styles from './styles';
 
-function ParticipantCard({ classes, participant }) {
+function ParticipantCard({ classes, row }) {
   const showParticipant = () => {
-    const pId = participant.id;
+    const pId = row.id;
     window.location.assign(`participants/${String(pId)}`);
   };
 
   // disabled eslint to make styling consistent
   // eslint-disable-next-line
-  const [numCaseNotes, setNumCaseNotes] = useState(participant.caseNotesCount);
+  const [numCaseNotes, setNumCaseNotes] = useState(row.caseNotesCount);
   const [numPaperworks, setNumPaperworks] = useState(
-    participant.paperworksCount,
+    row.paperworksCount,
   );
 
-  const questionnaireStatus = participant.questionnaireStatus ? (
+  const questionnaireStatus = row.questionnaireStatus ? (
     <FontAwesomeIcon
       className={classes.iconLarge}
       icon={faCheck}
@@ -53,17 +51,17 @@ function ParticipantCard({ classes, participant }) {
         onClick={showParticipant}
         onKeyDown={showParticipant}
       >
-        {participant.name}
+        {row.name}
       </TableCell>
       <TableCell align="center">
-        <div className={classes.status}>{participant.status.toUpperCase()}</div>
+        <div className={classes.status}>{row.status.toUpperCase()}</div>
       </TableCell>
       <TableCell align="left" className={classes.newAssignment}>
-        {participant.paperworksCompleted} / {numPaperworks} completed{' '}
+        {row.paperworksCompleted} / {numPaperworks} completed{' '}
         <PaperworkForm
           display="plus"
           type="create"
-          participantId={participant.id}
+          participantId={row.id}
           incrementNumPaperworks={() => setNumPaperworks(numPaperworks + 1)}
         ></PaperworkForm>
       </TableCell>
@@ -72,12 +70,12 @@ function ParticipantCard({ classes, participant }) {
         <CaseNoteForm
           display="plus"
           type="create"
-          participantId={participant.id}
+          participantId={row.id}
           incrementNumCaseNotes={() => setNumCaseNotes(numCaseNotes + 1)}
         ></CaseNoteForm>
       </TableCell>
       <TableCell>
-        {participant.assignmentsCompleted} / {participant.assignmentsCount}{' '}
+        {row.assignmentsCompleted} / {row.assignmentsCount}{' '}
         completed
       </TableCell>
       <TableCell>{questionnaireStatus}</TableCell>
@@ -96,7 +94,7 @@ function ParticipantCard({ classes, participant }) {
 
 ParticipantCard.propTypes = {
   classes: PropTypes.object.isRequired,
-  participant: PropTypes.object,
+  row: PropTypes.object,
 };
 
 export default withStyles(styles)(ParticipantCard);

@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import styles from './styles';
+import ParticipantCard from '../ParticipantCard';
 
 const TrieSearch = require('trie-search');
 
@@ -128,6 +129,7 @@ class StaffDashboard extends React.Component {
           rows={this.state.participants}
           pageHandler={this.onPageChange}
           page={this.state.pageNo}
+          CustomRowComponent={ParticipantCard}
         ></EnhancedTable>
       </div>
     );

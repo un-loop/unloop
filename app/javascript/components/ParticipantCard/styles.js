@@ -23,15 +23,15 @@ const styles = theme => ({
     lineHeight: '25px',
     color: theme.palette.common.white,
     fontSize: '12px',
-    backgroundColor: ({ participant }) => {
-      switch (participant.status.toUpperCase()) {
+    backgroundColor: ({ row }) => {
+      switch (row.status.toUpperCase()) {
         case 'R0':
           return theme.palette.common.r0;
         case 'R1':
           return theme.palette.common.r1;
         case 'R2':
           return theme.palette.common.r2;
-        case 'Studio':
+        case 'STUDIO':
           return theme.palette.common.studio;
         default:
           console.error('Participant has no status');
