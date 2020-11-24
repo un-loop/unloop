@@ -28,7 +28,12 @@ class AssignmentsController < ApplicationController
 
     def bulk_modify_create
       @action_item_id = params.fetch(:action_item_id)
-      @assignments = authorize Assignment.where(action_item_id: @action_item_id).order("updated_at DESC").includes(participant: :user)
+      @assignments = authorize Assignment.where(action_item_id: @action_item_id).order("updated_at DESC").includes(:participant)
+      @assignments_list = []
+      @assignments.each do |assignment|
+        serialized_assignment = BulkAssignmentSerializer.new(assignment)
+        @assignments_list.push(serialized_assignment)
+      end
       @action_item = ActionItem.find(@action_item_id)
     end
 

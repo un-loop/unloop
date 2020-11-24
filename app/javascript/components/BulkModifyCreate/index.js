@@ -14,8 +14,10 @@ function BulkModifyCreate
     classes,
     actionItemId,
     assignments,
+    assignmentsList,
     actionItem,
 }) {
+    console.log(assignmentsList)
     const columns = [
         { field: 'participant_id', headerName: 'ID', width: 70 },
         { field: 'participants', headerName: 'Name', width: 130 },

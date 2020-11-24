@@ -10,8 +10,8 @@ import styles from './styles';
 
 function BulkModifySelectCard({ classes, row }) {
     const showActionItem = () => {
-        // const actionItemId = row.id;
-        window.location.assign(`/assignments/bulk-modify/{action-item-id}`);
+        const actionItemId = row.id;
+        window.location.assign(`/assignments/bulk-modify/${actionItemId}`);
     }
     return (
         <>
