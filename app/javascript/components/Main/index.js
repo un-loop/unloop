@@ -30,12 +30,13 @@ import UnloopLogo from 'images/unloop_logo.png';
 import BlueprintBanner from 'images/blueprint_banner.png';
 import * as Sentry from '@sentry/browser';
 import StaffDashboard from '../StaffDashboard';
-import BulkModifySelect from '../BulkModifySelect';
 import styles from './styles';
 import { apiGet } from '../../utils/axios';
 import StudioAssessmentDashboard from '../StudioAssessmentDashboard';
 import ParticipantShowPage from '../ParticipantShowPage';
 import ActionItemCreationPage from '../ActionItemCreationPage';
+import BulkModifySelect from '../BulkModifySelect';
+import BulkModifyCreate from '../BulkModifyCreate';
 
 function Main(props) {
   const { classes } = props;
@@ -131,6 +132,10 @@ function Main(props) {
       case 'BulkModifySelect':
         return (
           <BulkModifySelect {...contentProps}></BulkModifySelect>
+        );
+      case 'BulkModifyCreate':
+        return (
+          <BulkModifyCreate {...contentProps}></BulkModifyCreate>
         );
       default:
         return null;
