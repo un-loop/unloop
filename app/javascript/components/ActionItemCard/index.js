@@ -221,8 +221,9 @@ function ActionItemCard({
           alignItems="center"
         >
           <Grid item className={classes.descriptionStyle} zeroMinWidth>
-            <Typography noWrap variant="body1" style={{ fontSize: '14px' }}>
-            {description[0] === '{' ? renderRichText(description) : description}
+            <Typography noWrap variant="h6" style={{ fontSize: '14px' }}>
+              {/* this makes the description backwards compatible TextField or RichText */}
+              {description[0] === '{' ? renderRichText(description) : description} 
             </Typography>
           </Grid>
           <Grid item>

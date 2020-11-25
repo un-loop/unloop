@@ -127,18 +127,6 @@ function ActionItemForm({
                 ]}
               />
               </MuiThemeProvider>
-              {/* <TextField
-                variant="outlined"
-                className={classes.searchBar}
-                onChange={e => setDescription(e)}
-                multiline
-                type="text"
-                margin="dense"
-                value={description}
-                required
-                error={failedSubmit && !description}
-                rows={2}
-              /> */}
             </Grid>
             <Grid item>
               <Typography variant="body1">Due Date (Optional)</Typography>

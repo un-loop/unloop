@@ -169,7 +169,9 @@ class ActionItemModal extends React.Component {
               Description
             </DialogContentText>
             <MuiThemeProvider theme={defaultTheme}>
-              <MUIRichTextEditor
+              {/* makes this backwards compatible TextField vs RichText */}
+            {description[0] === '{' ?
+             ( <MUIRichTextEditor
                 name="description"
                 value={description}
                 onChange={this.handleDescriptionChange('description')}
@@ -186,7 +188,21 @@ class ActionItemModal extends React.Component {
                   'link',
                   'code',
                 ]}
-              />
+              /> ):( 
+              <TextField  
+                value={this.state.description}
+                className={classes.dialogContentTextFieldStyle}
+                name="description"
+                onChange={this.handleChange('description')}
+                variant="outlined"
+                margin="dense"
+                id="description"
+                label="Assignment description"
+                type="text"
+                fullWidth
+                multiline
+                rows={4}
+              />)}
             </MuiThemeProvider>
           </DialogContent>
           <DialogContent className={classes.dialogContentStyle}>

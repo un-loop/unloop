@@ -98,7 +98,7 @@ function ViewMoreModal({
               <Grid item xs={12}>
                 <Paper className={classes.caseNoteCardModalDescriptionStyle}>
                   <div className={classes.caseNoteDescStyle}>
-                    {renderRichText(description)}
+                    {description[0] === '{' ? renderRichText(description) : description}
                   </div>
                 </Paper>
               </Grid>
