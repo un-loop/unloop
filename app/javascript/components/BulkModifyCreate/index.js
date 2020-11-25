@@ -9,13 +9,11 @@ import styles from './styles';
 function BulkModifyCreate({
   classes,
   actionItemId,
-  assignments,
   assignmentsList,
   actionItem,
 }) {
     console.log('actionItem', actionItem);
     console.log('actionItemId', actionItemId);
-    console.log('assignments', assignments);
     console.log('assignmentsList', assignmentsList);
 
     const dateHelper = {
@@ -38,36 +36,18 @@ function BulkModifyCreate({
                 </Grid>
                 
             </Grid>
-                    {assignmentsList.map((item, i) => {
-                        var name = item.participant.name;
-                        console.log('name', name);
-                        return (
-
-                            <DataGrid key={i}
-                                columns={[
-                                    { field: 'participant_id', headerName: 'ID', width: 70 },
-                                    { field: 'name', headerName: 'Name', width: 160 },
-                                    { field: 'updated_at', headerName: 'Assigned Date', ...dateHelper },
-                                    { field: 'due_date', headerName: 'Due Date', ...dateHelper },
-                                    { field: 'completed_participant', headerName: 'Completed', width: 130 },
-
-                                ]}
-                                rows={assignments}
-                                pageSize={10} 
-                                checkboxSelection 
-                            />
-                        )
-                     })}
-            
-            <Grid container justify="flex-end">
-                <Grid item>
-                    <Button>
-                        MODIFY
-                    </Button>
-                </Grid>
-            </Grid>
-            
-
+                <DataGrid
+                    columns={[
+                        { field: 'participant_id', headerName: 'ID', width: 70 },
+                        { field: 'participant', headerName: 'Name', width: 160, valueFormatter: ({value}) =>  value.name },
+                        { field: 'updated_at', headerName: 'Assigned Date', ...dateHelper },
+                        { field: 'due_date', headerName: 'Due Date', ...dateHelper },
+                        { field: 'completed_participant', headerName: 'Completed', width: 130 },
+                    ]}
+                    rows={assignmentsList}
+                    pageSize={10} 
+                    checkboxSelection 
+                />
         </>
     )
 };
