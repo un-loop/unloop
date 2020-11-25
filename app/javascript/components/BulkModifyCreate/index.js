@@ -38,7 +38,6 @@ function BulkModifyCreate({
             </Grid>
                 <DataGrid
                     columns={[
-                        { field: 'participant_id', headerName: 'ID', width: 70 },
                         { field: 'participant', headerName: 'Name', width: 160, valueFormatter: ({value}) =>  value.name },
                         { field: 'updated_at', headerName: 'Assigned Date', ...dateHelper },
                         { field: 'due_date', headerName: 'Due Date', ...dateHelper },
