@@ -23,6 +23,10 @@ class AssignmentPolicy < ApplicationPolicy
       staff? or (user.participant? and (user.participant.id == resource.participant.id))
     end
 
+    def bulk_modify_create?
+      staff?
+    end
+
     class Scope < Scope
       def resolve
         if user.staff?

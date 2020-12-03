@@ -18,6 +18,7 @@ import { apiPatch } from 'utils/axios';
 import * as Sentry from '@sentry/browser';
 import formatDate from 'utils/utils';
 import styles from './styles';
+import MUIRichTextEditor from 'mui-rte';
 function ActionItemCard({
   classes,
   userType,
@@ -43,7 +44,9 @@ function ActionItemCard({
     initialCompletedParticipant,
   );
   const [completedStaff, setCompletedStaff] = useState(initialCompletedStaff);
-
+  const renderRichText = desc => (
+    <MUIRichTextEditor value={desc} readOnly toolbar={false} />
+  );  
   const renderSelectIcon = () => (
     <IconButton aria-label="add" onClick={handleIconClick}>
       {selected ? <CheckCircleIcon /> : <AddIcon />}
@@ -218,8 +221,9 @@ function ActionItemCard({
           alignItems="center"
         >
           <Grid item className={classes.descriptionStyle} zeroMinWidth>
-            <Typography noWrap variant="body1" style={{ fontSize: '14px' }}>
-              {description}
+            <Typography noWrap variant="h6" style={{ fontSize: '14px' }}>
+              {/* this makes the description backwards compatible TextField or RichText */}
+              {description[0] === '{' ? renderRichText(description) : description} 
             </Typography>
           </Grid>
           <Grid item>
@@ -244,7 +248,7 @@ function ActionItemCard({
         >
           <Grid item>
             {dueDate ? (
-              <Typography variant="body1" style={{ fontSize: '14px' }}>
+              <Typography variant="body1" style={{ fontSize: '14px', marginTop: '20px'}}>
                 Due: {formatDate(dueDate)}
               </Typography>
             ) : null}

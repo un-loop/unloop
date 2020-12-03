@@ -11,9 +11,12 @@ import {
   DialogContentText,
   Grid,
 } from '@material-ui/core';
-import { withStyles, ThemeProvider } from '@material-ui/core/styles';
+import { withStyles, ThemeProvider, MuiThemeProvider } from '@material-ui/core/styles';
 import ActionItemCategoryTag from 'components/ActionItemCategoryTag';
-import styles from './styles';
+import { styles, defaultTheme } from './styles';
+import MUIRichTextEditor from 'mui-rte';
+import { convertToRaw } from 'draft-js';
+
 class ActionItemModal extends React.Component {
   constructor(props) {
     super(props);
@@ -31,6 +34,11 @@ class ActionItemModal extends React.Component {
 
   handleChange = name => event => {
     const { value } = event.target;
+    this.setState({ [name]: value });
+  };
+
+  handleDescriptionChange = name => state => {
+    const value = JSON.stringify(convertToRaw(state.getCurrentContent()));
     this.setState({ [name]: value });
   };
 
@@ -101,7 +109,6 @@ class ActionItemModal extends React.Component {
         </Grid>
       );
     });
-
     return (
       <ThemeProvider theme={theme}>
         <Dialog
@@ -161,20 +168,42 @@ class ActionItemModal extends React.Component {
             >
               Description
             </DialogContentText>
-            <TextField
-              value={this.state.description}
-              className={classes.dialogContentTextFieldStyle}
-              name="description"
-              onChange={this.handleChange('description')}
-              variant="outlined"
-              margin="dense"
-              id="description"
-              label="Assignment description"
-              type="text"
-              fullWidth
-              multiline
-              rows={4}
-            />
+            <MuiThemeProvider theme={defaultTheme}>
+              {/* makes this backwards compatible TextField vs RichText */}
+            {description[0] === '{' ?
+             ( <MUIRichTextEditor
+                name="description"
+                value={description}
+                onChange={this.handleDescriptionChange('description')}
+                variant="outlined"
+                id="description"
+                label="Assignment description"
+                className={classes.MUIRichTextEditorStyle}
+                controls={[
+                  'bold',
+                  'italic',
+                  'underline',
+                  'numberList',
+                  'bulletList',
+                  'link',
+                  'code',
+                ]}
+              /> ):( 
+              <TextField  
+                value={this.state.description}
+                className={classes.dialogContentTextFieldStyle}
+                name="description"
+                onChange={this.handleChange('description')}
+                variant="outlined"
+                margin="dense"
+                id="description"
+                label="Assignment description"
+                type="text"
+                fullWidth
+                multiline
+                rows={4}
+              />)}
+            </MuiThemeProvider>
           </DialogContent>
           <DialogContent className={classes.dialogContentStyle}>
             <DialogContentText className={classes.dialogContentTextStyle}>

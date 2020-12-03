@@ -15,6 +15,14 @@ class ActionItemPolicy < ApplicationPolicy
       staff?
     end
 
+    def bulk_modify_select?
+      staff?
+    end
+
+    def bulk_modify_create?
+      staff?
+    end
+
     private
 
     def staff?
